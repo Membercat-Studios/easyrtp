@@ -1,0 +1,78 @@
+# EasyRTP Configuration
+# Made by maybeizen
+
+settings:
+  cooldown: 30 # time in seconds between random teleports
+  enable-sounds: true # whether to play sounds for teleport events
+  teleport-delay: 3 # delay in seconds before teleporting (0 for instant)
+  max-attempts: 100 # maximum attempts to find a safe location
+  min-distance: 1000 # minimum distance from spawn
+  max-distance: 10000 # maximum distance from spawn
+  center-x: 0 # center X coordinate for random teleport area
+  center-z: 0 # center Z coordinate for random teleport area
+  min-y: 60 # minimum Y level for teleport location
+  max-y: 120 # maximum Y level for teleport location
+  safe-location-check: true # whether to check for safe locations (no lava, void, etc.)
+  world-blacklist: [] # list of worlds where RTP is disabled
+  preload-chunks: true # whether to preload chunks around teleport location
+  preload-radius: 2 # radius of chunks to preload around teleport location
+
+  # Cost settings
+  hunger-cost: 0 # hunger points to consume (0-20, 0 = disabled)
+  xp-cost: 0 # experience levels to consume (0 = disabled)
+  require-costs: false # whether to require costs even if player has bypass permission
+
+  # Title settings
+  enable-titles: true # whether to show titles during teleport
+  title-fade-in: 10 # ticks for title fade in
+  title-stay: 40 # ticks for title to stay
+  title-fade-out: 10 # ticks for title fade out
+
+  # Effect settings
+  blindness-duration: 1 # duration of blindness effect in seconds (0 = disabled)
+
+messages:
+  prefix: "&7[&6EasyRTP&7] &r"
+
+  # Command messages
+  player-only: "&cThis command can only be used by players."
+  no-permission: "&cYou don't have permission to use this command."
+  rtp-usage: "&cUsage: /rtp [player] [world]"
+  rtpo-usage: "&cUsage: /rtpo <player> [world]"
+  admin-usage: "&cUsage: /easyrtp reload"
+  player-not-found: "&cPlayer not found."
+  world-not-found: "&cWorld not found."
+  cannot-teleport-self: "&cYou cannot teleport yourself with /rtpo!"
+
+  # Cooldown message
+  cooldown: "&cYou must wait &e%time% &cseconds before using RTP again!"
+
+  # Teleport messages
+  teleport-starting: "&eStarting random teleport in &6%delay% &eseconds..."
+  teleport-success: "&aYou have been teleported to a random location!"
+  teleport-success-other: "&a%player% has been teleported to a random location!"
+  teleport-failed: "&cFailed to find a safe location! Please try again."
+  teleport-cancelled: "&cRandom teleport cancelled!"
+  teleport-world-disabled: "&cRandom teleport is disabled in this world!"
+  teleport-other-starting: "&eTeleporting &6%player% &eto a random location..."
+  teleport-other-success: "&aYou have been teleported to a random location by &6%sender%&a!"
+  teleport-in-progress: "&cYou are already teleporting! Please wait for the current teleport to complete."
+
+  # Location information
+  teleport-location: "&7Location: &e%x%, %y%, %z% &7in &e%world%"
+  teleport-time: "&7Teleport took &e%time%ms"
+
+  # Cost messages
+  insufficient-hunger: "&cYou need at least &6%hunger% &chunger points to use RTP!"
+  insufficient-xp: "&cYou need at least &6%xp% &cexperience levels to use RTP!"
+  cost-applied: "&7Cost: &6-%hunger% hunger &7and &6-%xp% XP levels"
+
+  # Title messages
+  title-teleporting: "&6&lTELEPORTING..."
+  subtitle-teleporting: "&7Finding safe location..."
+  title-success: "&a&lTELEPORTED!"
+  subtitle-success: "&7Welcome to your new location!"
+
+  # Admin messages
+  config-reloading: "&eReloading EasyRTP configuration..."
+  config-reloaded: "&aConfiguration has been reloaded successfully!"

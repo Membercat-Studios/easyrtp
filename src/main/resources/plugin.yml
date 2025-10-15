@@ -1,0 +1,45 @@
+name: EasyRTP
+version: v1.0.0
+main: com.maybeizen.EasyRTP.EasyRTP
+api-version: "1.19"
+authors: [maybeizen]
+description: "Random teleports: Simple. Safe. Fast"
+commands:
+  rtp:
+    description: Teleport to a random location
+    usage: /rtp [player] [world]
+    permission: easyrtp.rtp
+  rtpo:
+    description: Teleport another player to a random location
+    usage: /rtpo <player> [world]
+    permission: easyrtp.rtpo
+  easyrtp:
+    description: Admin commands for EasyRTP
+    usage: /easyrtp reload
+    permission: easyrtp.admin
+
+permissions:
+  easyrtp.rtp:
+    description: Allows using random teleport
+    default: true
+  easyrtp.rtpo:
+    description: Allows teleporting other players to random locations
+    default: op
+  easyrtp.world.bypass:
+    description: Allows bypassing world blacklist restrictions
+    default: op
+  easyrtp.admin:
+    description: Allows access to admin commands
+    default: op
+  easyrtp.cooldown.bypass:
+    description: Allows bypassing the cooldown between random teleports
+    default: op
+  easyrtp.*:
+    description: Grants all EasyRTP permissions
+    default: op
+    children:
+      easyrtp.rtp: true
+      easyrtp.rtpo: true
+      easyrtp.world.bypass: true
+      easyrtp.admin: true
+      easyrtp.cooldown.bypass: true
