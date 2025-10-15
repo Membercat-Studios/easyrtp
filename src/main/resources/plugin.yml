@@ -1,8 +1,8 @@
 name: EasyRTP
-version: v1.0.0
+version: v1.0.0-Alpha
 main: com.maybeizen.EasyRTP.EasyRTP
 api-version: "1.19"
-authors: [maybeizen]
+authors: [maybeizen, "Membercat Studios"]
 description: "Random teleports: Simple. Safe. Fast"
 commands:
   rtp:
