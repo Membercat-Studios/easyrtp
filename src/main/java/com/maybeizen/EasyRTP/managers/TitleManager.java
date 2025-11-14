@@ -54,4 +54,25 @@ public class TitleManager {
         
         player.showTitle(title);
     }
+
+    public void showCancelTitle(Player player) {
+        if (!plugin.getConfigManager().getEnableCancelTitle()) {
+            return;
+        }
+
+        String titleText = plugin.getConfigManager().getMessage("title-cancelled");
+        String subtitleText = plugin.getConfigManager().getMessage("subtitle-cancelled");
+        
+        Title title = Title.title(
+            MessageUtils.parseText(titleText),
+            MessageUtils.parseText(subtitleText),
+            Title.Times.times(
+                java.time.Duration.ofMillis(plugin.getConfigManager().getTitleFadeIn() * 50L),
+                java.time.Duration.ofMillis(plugin.getConfigManager().getTitleStay() * 50L),
+                java.time.Duration.ofMillis(plugin.getConfigManager().getTitleFadeOut() * 50L)
+            )
+        );
+        
+        player.showTitle(title);
+    }
 }

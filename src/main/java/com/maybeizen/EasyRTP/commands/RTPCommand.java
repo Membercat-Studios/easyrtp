@@ -21,7 +21,7 @@ public class RTPCommand implements CommandExecutor, TabCompleter {
 
     public RTPCommand(EasyRTP plugin) {
         this.plugin = plugin;
-        this.rtpManager = new RTPManager(plugin);
+        this.rtpManager = plugin.getRTPManager();
     }
 
     @Override

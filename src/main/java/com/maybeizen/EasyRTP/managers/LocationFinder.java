@@ -47,6 +47,11 @@ public class LocationFinder {
                 continue;
             }
 
+            boolean requireSkyVisibility = plugin.getConfigManager().getRequireSkyVisibility();
+            if (requireSkyVisibility && !hasSkyVisibility(location, world)) {
+                continue;
+            }
+
             return location;
         }
 
@@ -73,13 +78,13 @@ public class LocationFinder {
 
     private boolean isLocationSafe(Location location) {
         Location[] checkLocations = {
-            location.clone().add(0, -1, 0), // Block below feet
-            location.clone().add(1, 0, 0),  // Block to the right
-            location.clone().add(-1, 0, 0), // Block to the left
-            location.clone().add(0, 0, 1),  // Block in front
-            location.clone().add(0, 0, -1), // Block behind
-            location.clone().add(0, 1, 0),  // Block at head level
-            location.clone().add(0, 2, 0)   // Block above head
+            location.clone().add(0, -1, 0),
+            location.clone().add(1, 0, 0),
+            location.clone().add(-1, 0, 0),
+            location.clone().add(0, 0, 1),
+            location.clone().add(0, 0, -1),
+            location.clone().add(0, 1, 0),
+            location.clone().add(0, 2, 0)
         };
 
         for (Location checkLoc : checkLocations) {
@@ -99,6 +104,22 @@ public class LocationFinder {
             return false;
         }
 
+        return true;
+    }
+
+    private boolean hasSkyVisibility(Location location, World world) {
+        int startY = location.getBlockY() + 1;
+        int maxHeight = world.getMaxHeight();
+        
+        for (int y = startY; y < maxHeight; y++) {
+            Location checkLocation = new Location(world, location.getBlockX(), y, location.getBlockZ());
+            Material blockType = checkLocation.getBlock().getType();
+            
+            if (blockType.isSolid()) {
+                return false;
+            }
+        }
+        
         return true;
     }
 

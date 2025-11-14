@@ -29,6 +29,24 @@ public class VersionAdapter {
         }
     }
 
+    public static void playCancelSound(Player player, String soundName) {
+        try {
+            Sound sound;
+            if (IS_LEGACY) {
+                sound = Sound.valueOf(soundName);
+            } else {
+                sound = Sound.valueOf(soundName);
+            }
+            player.playSound(player.getLocation(), sound, 1.0f, 0.5f);
+        } catch (IllegalArgumentException e) {
+            if (IS_LEGACY) {
+                player.playSound(player.getLocation(), Sound.valueOf("BLOCK_NOTE_BLOCK_BASS"), 1.0f, 0.5f);
+            } else {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1.0f, 0.5f);
+            }
+        }
+    }
+
     public static String getServerVersion() {
         return SERVER_VERSION;
     }

@@ -1,5 +1,5 @@
 name: EasyRTP
-version: v1.0.0-Alpha
+version: v1.1.0-Alpha
 main: com.maybeizen.EasyRTP.EasyRTP
 api-version: "1.19"
 authors: [maybeizen, "Membercat Studios"]

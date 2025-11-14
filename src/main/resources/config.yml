@@ -13,6 +13,7 @@ settings:
   min-y: 60 # minimum Y level for teleport location
   max-y: 120 # maximum Y level for teleport location
   safe-location-check: true # whether to check for safe locations (no lava, void, etc.)
+  require-sky-visibility: true # whether teleport locations must have clear sky access (no solid blocks above)
   world-blacklist: [] # list of worlds where RTP is disabled
   preload-chunks: true # whether to preload chunks around teleport location
   preload-radius: 2 # radius of chunks to preload around teleport location
@@ -27,9 +28,12 @@ settings:
   title-fade-in: 10 # ticks for title fade in
   title-stay: 40 # ticks for title to stay
   title-fade-out: 10 # ticks for title fade out
+  enable-cancel-title: true # whether to show title when teleport is cancelled due to movement
 
   # Effect settings
   blindness-duration: 1 # duration of blindness effect in seconds (0 = disabled)
+  enable-cancel-sound: true # whether to play sound when teleport is cancelled due to movement
+  cancel-sound: "BLOCK_NOTE_BLOCK_BASS" # sound to play when teleport is cancelled (e.g., BLOCK_NOTE_BLOCK_BASS, ENTITY_VILLAGER_NO)
 
 messages:
   prefix: "&7[&6EasyRTP&7] &r"
@@ -72,6 +76,8 @@ messages:
   subtitle-teleporting: "&7Finding safe location..."
   title-success: "&a&lTELEPORTED!"
   subtitle-success: "&7Welcome to your new location!"
+  title-cancelled: "&c&lTELEPORT CANCELLED!"
+  subtitle-cancelled: "&7You moved and your teleport was cancelled!"
 
   # Admin messages
   config-reloading: "&eReloading EasyRTP configuration..."

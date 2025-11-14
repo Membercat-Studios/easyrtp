@@ -4,7 +4,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.maybeizen.EasyRTP.commands.*;
+import com.maybeizen.EasyRTP.listeners.PlayerMoveListener;
 import com.maybeizen.EasyRTP.managers.CooldownManager;
+import com.maybeizen.EasyRTP.managers.RTPManager;
 import com.maybeizen.EasyRTP.utils.ConfigManager;
 import com.maybeizen.EasyRTP.utils.DatabaseManager;
 import com.maybeizen.EasyRTP.utils.MessageUtils;
@@ -14,6 +16,7 @@ public class EasyRTP extends JavaPlugin {
     private ConfigManager configManager;
     private DatabaseManager databaseManager;
     private CooldownManager cooldownManager;
+    private RTPManager rtpManager;
 
     @Override
     public void onEnable() {
@@ -24,7 +27,9 @@ public class EasyRTP extends JavaPlugin {
         MessageUtils.initialize(this);
         
         this.cooldownManager = new CooldownManager(configManager.getCooldown());
-    
+        this.rtpManager = new RTPManager(this);
+        
+        getServer().getPluginManager().registerEvents(new PlayerMoveListener(this), this);
     
         RTPCommand rtpCommand = new RTPCommand(this);
         getCommand("rtp").setExecutor(rtpCommand);
@@ -74,6 +79,9 @@ public class EasyRTP extends JavaPlugin {
         return cooldownManager;
     }
 
+    public RTPManager getRTPManager() {
+        return rtpManager;
+    }
 
 }
 

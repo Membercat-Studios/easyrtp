@@ -1,5 +1,6 @@
 package com.maybeizen.EasyRTP.managers;
 
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -16,11 +17,13 @@ public class RTPManager {
     private final EasyRTP plugin;
     private final TeleportExecutor teleportExecutor;
     private final Map<UUID, BukkitRunnable> teleportTasks;
+    private final Map<UUID, Location> teleportStartLocations;
 
     public RTPManager(EasyRTP plugin) {
         this.plugin = plugin;
         this.teleportExecutor = new TeleportExecutor(plugin);
         this.teleportTasks = new HashMap<>();
+        this.teleportStartLocations = new HashMap<>();
     }
 
     public boolean canAffordTeleport(Player player) {
@@ -50,6 +53,9 @@ public class RTPManager {
                 plugin.getConfigManager().getMessage("teleport-starting", "delay", String.valueOf(delay))
             ));
 
+            // Store starting location for movement detection
+            teleportStartLocations.put(playerId, player.getLocation().clone());
+
             BukkitRunnable task = new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -57,6 +63,7 @@ public class RTPManager {
                         teleportExecutor.executeTeleport(player, world);
                     }
                     teleportTasks.remove(playerId);
+                    teleportStartLocations.remove(playerId);
                 }
             };
 
@@ -82,6 +89,9 @@ public class RTPManager {
         if (delay <= 0) {
             teleportExecutor.executeTeleportOther(sender, targetPlayer, world);
         } else {
+            // Store starting location for movement detection
+            teleportStartLocations.put(playerId, targetPlayer.getLocation().clone());
+
             BukkitRunnable task = new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -89,6 +99,7 @@ public class RTPManager {
                         teleportExecutor.executeTeleportOther(sender, targetPlayer, world);
                     }
                     teleportTasks.remove(playerId);
+                    teleportStartLocations.remove(playerId);
                 }
             };
 
@@ -102,6 +113,7 @@ public class RTPManager {
         if (task != null) {
             task.cancel();
             teleportTasks.remove(playerId);
+            teleportStartLocations.remove(playerId);
         }
     }
 
@@ -110,5 +122,14 @@ public class RTPManager {
             task.cancel();
         }
         teleportTasks.clear();
-    }        // Check if target player is already teleporting
+        teleportStartLocations.clear();
+    }
+
+    public boolean hasActiveTeleport(UUID playerId) {
+        return teleportTasks.containsKey(playerId);
+    }
+
+    public Location getTeleportStartLocation(UUID playerId) {
+        return teleportStartLocations.get(playerId);
+    }
 }
