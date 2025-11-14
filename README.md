@@ -3,7 +3,7 @@
   <h1>EasyRTP</h1>
   <p><strong>Random teleports: Simple. Safe. Fast</strong></p>
   
-  [![Minecraft](https://img.shields.io/badge/Minecraft-1.19.4--1.21.4-brightgreen)](https://www.minecraft.net/)
+  [![Minecraft](https://img.shields.io/badge/Minecraft-1.19.4--1.21.X-brightgreen)](https://www.minecraft.net/)
   [![License](https://img.shields.io/badge/License-MIT-blue.svg)](license)
   [![Java](https://img.shields.io/badge/Java-17%2B-orange)](https://www.java.com/)
 </div>
@@ -20,7 +20,7 @@
 - **Anti-Spam Protection** - Prevents multiple simultaneous teleports
 - **Fully Customizable** - Extensive configuration options
 - **Permission System** - Granular permission control
-- **Multi-version Support** - Compatible with Minecraft 1.19.4 through 1.21.9
+- **Multi-version Support** - Compatible with Minecraft 1.19.4 through 1.21.X
 
 ## Commands
 
